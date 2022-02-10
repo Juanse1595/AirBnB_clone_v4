@@ -9,6 +9,11 @@ $(document).ready(function () {
         return item !== toRemove;
       });
     }
+    $("div.amenities h4").css("width", "200px");
+    $("div.amenities h4").css("height", "17px");
+    $("div.amenities h4").css("overflow", "hidden");
+    $("div.amenities h4").css("white-space", "nowrap");
+    $("div.amenities h4").css("text-overflow", "ellipsis");
     $("div.amenities h4").text(lst.join(", "));
   });
 });
