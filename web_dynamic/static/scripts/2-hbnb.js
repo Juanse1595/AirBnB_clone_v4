@@ -1,13 +1,12 @@
 const checkStatus = () => {
-  const request = require('request');
-  const url = `http://${window.location.hostname}:5001/api/v1/status/`;
-  request.get(url).on('response', (response) => {
-    if (response.statusCode === 200) {
+  let url = `http://${window.location.hostname}:5001/api/v1/status/`
+  $.get(url, (data) => {
+    if (data.status === 'OK') {
       $("div#api_status").addClass("available")
-    } else {
-      $("div#api_status").removeClass("available")
+      return;
     }
   });
+  $("div#api_status").removeClass("available")
 }
 
 $(document).ready(function () {
