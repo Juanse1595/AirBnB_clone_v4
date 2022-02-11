@@ -1,4 +1,4 @@
-const lst = {};
+const checkedAmenities = {};
 window.onload = function () {
   // console.log("before load places")
   checkStatus();
@@ -10,11 +10,14 @@ function selectAmenities() {
     const name = $(this).attr('data-name');
     const id = $(this).attr('data-id');
     if (this.checked) {
-      lst [id] = name;
+      checkedAmenities [id] = name;
     } else {
-      delete lst[id];
+      delete checkedAmenities[id];
     }
-    $('.amenities h4').text(Object.values(lst).join(', '));
+    if (Object.keys(checkedAmenities)) {
+      $('.amenities h4').html('&nbsp;');
+    }
+    $('.amenities h4').text(Object.values(checkedAmenities).join(', '));
   });
 }
 function checkStatus () {
@@ -26,10 +29,10 @@ function checkStatus () {
   });
 };
 
-async function loadPlaces () {
+async function loadPlaces() {
   const url = `http://${window.location.hostname}:5001/api/v1/places_search/`;
   const header = {
-    "body": JSON.stringify({}),
+    "body": JSON.stringify(checkedAmenities),
     "headers": {
       "Content-Type": "application/json"
     },
